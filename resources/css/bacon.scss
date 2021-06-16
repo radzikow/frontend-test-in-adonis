@@ -1,0 +1,32 @@
+.bacon-page {
+  max-width: 620px;
+  margin: auto;
+  height: 100vh;
+  padding: 0 30px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  .bacon-button {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    border-radius: 20px;
+    padding: 9px 18px;
+    border: none;
+    background: #5A45FF;
+    color: white;
+    cursor: pointer;
+  }
+
+  .bacon-images-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 100vh;
+
+    .bacon-image {
+      display: inline-block;
+      width: 20%;
+    }
+  }
+}

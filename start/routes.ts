@@ -25,9 +25,7 @@ Route.get('/', async ({ view }) => {
   return view.render('index')
 })
 
-Route.get('/bacon', async ({ view }) => {
-  return view.render('bacon')
-})
+Route.get('/bacon', 'BaconsController.index')
 
 Route.get('/checkout', async ({ view }) => {
   const state = {
