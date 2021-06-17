@@ -10,10 +10,10 @@ const phoneInput = document.getElementById('phoneInput')
 
 // Add dashes to 'credit card number' input
 if (creditCardInput) {
-  creditCardInput.addEventListener('keydown', handleCreditCardInputKeyup)
+  creditCardInput.addEventListener('keydown', handleCreditCardInputKeydown)
 }
 
-function handleCreditCardInputKeyup (ev) {
+function handleCreditCardInputKeydown (ev) {
   let rawNumbers = this.value.replace(/-/g, '')
   let cardLength = rawNumbers.length
   let charCode = ev.which ? ev.which : ev.keyCode
@@ -97,6 +97,7 @@ function singleInputValidation(inputElement, name) {
   if (inputElement) {
     inputElement.addEventListener('keyup', (ev) => {
       let charCode = ev.which ? ev.which : ev.keyCode
+      // prevent from validating input when jumping to another one using tab
       if (charCode !== 9) {
         validateFormData(completePurchaseForm, [name])
       }
@@ -175,7 +176,7 @@ function validateFormData (form, names) {
     hideErrorMessage(form, 'phone')
     let value = form.querySelector('[name="phone"]').value
     if (isValueEmpty(value)) {
-      showErrorMessage(form, 'phone', 'Phone is required')
+      showErrorMessage(form, 'phone', 'Phone number is required')
     } else if (!isValuePhoneFormat(value)) {
       showErrorMessage(form, 'phone', 'Phone number format is incorrect')
     }
@@ -199,7 +200,7 @@ function validateFormData (form, names) {
     if (isValueEmpty(value)) {
       showErrorMessage(form, 'security_code', 'Security code is required')
     } else if (value.length !== 3) {
-      showErrorMessage(form, 'security_code', 'Security code must have 3 characters')
+      showErrorMessage(form, 'security_code', 'Security code must have 3 numbers')
     } else if (!isValueSecurityCodeFormat(value)) {
       showErrorMessage(form, 'security_code', 'Security code format is incorrect')
     }
@@ -322,7 +323,7 @@ function completePurchase () {
 
   $.ajax({
     headers: {
-      'x-csrf-token': $('input[name="_csrf"]').val(),
+      'x-csrf-token': document.querySelector('input[name="_csrf"]').value,
     },
     async: true,
     type: 'POST',
@@ -331,14 +332,16 @@ function completePurchase () {
     contentType: false,
     processData: false,
     success: (response) => {
+      window.scrollTo(0, 0)
       formMessage.classList.remove('error')
       formMessage.classList.add('success')
       formMessage.innerHTML = response.message
       setTimeout(() => {
         window.location.href = 'http://127.0.0.1:3333/'
-      }, 4000)
+      }, 6000)
     },
     error: (response) => {
+      window.scrollTo(0, 0)
       formMessage.classList.remove('success')
       formMessage.classList.add('error')
       formMessage.innerHTML = 'Error occurred. Please check if the form is correctly completed.'
