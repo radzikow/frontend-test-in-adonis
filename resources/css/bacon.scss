@@ -7,26 +7,30 @@
   display: flex;
   justify-content: center;
 
-  .bacon-button {
-    position: fixed;
-    top: 30px;
-    left: 30px;
-    border-radius: 20px;
-    padding: 9px 18px;
-    border: none;
-    background: #5A45FF;
-    color: white;
-    cursor: pointer;
-  }
+  section {
+    &:nth-child(1) {
+      button {
+        position: fixed;
+        top: 30px;
+        left: 30px;
+        border-radius: 20px;
+        padding: 9px 18px;
+        border: none;
+        background: #5A45FF;
+        color: white;
+        cursor: pointer;
+      }
+    }
 
-  .bacon-images-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    max-height: 100vh;
+    &:nth-child(2) {
+      display: flex;
+      flex-wrap: wrap;
+      max-height: 100vh;
 
-    .bacon-image {
-      display: inline-block;
-      width: 20%;
+      img {
+        display: inline-block;
+        width: 50%;
+      }
     }
   }
 }
