@@ -1,10 +1,18 @@
-@import '../css/variables.scss';
+@import '../scss/layout/grid';
+@import '../scss/layout/breakpoints';
+@import '../scss/layout/containers';
+@import '../scss/utilities/variables';
+@import '../scss/pages/welcome';
+@import '../scss/pages/bacon';
+@import '../scss/pages/checkout';
+@import '../scss/partials/tooltip';
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
 
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 html,
@@ -18,13 +26,5 @@ body {
     min-height: 100vh;
     display: flex;
     align-items: center;
-
-    .welcome-page {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      text-align: center;
-      transform: translate(-50%, -50%);
-    }
   }
 }

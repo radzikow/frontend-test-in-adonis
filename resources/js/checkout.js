@@ -68,9 +68,9 @@ function handleSecurityCodeInputBackspace (ev) {
 }
 
 // Question mark tooltip (bootstrap) setup
-$('#questionMarkIcon').tooltip({
-  container: '#questionMarkIconContainer',
-})
+// $('#questionMarkIcon').tooltip({
+//   container: '#questionMarkIconContainer',
+// })
 
 // Handle complete purchase form submit
 const completePurchaseButton = document.getElementById('completePurchaseButton')
@@ -220,7 +220,7 @@ function validateFormData (form, names) {
 // Validation helper functions
 function isValidationCorrect (form) {
   let errors = 0
-  let errorMessages = [...form.querySelectorAll('.error-message')]
+  let errorMessages = [...form.querySelectorAll('.input-group__message')]
   errorMessages.forEach(message => {
     if (message.innerHTML !== '') {
       errors++
@@ -263,7 +263,7 @@ function isValuePhoneFormat (value) {
 // Show/hide input error message functions
 function hideErrorMessage (form, name) {
   let wrapper = form.querySelector(`[name="${name}"]`).parentElement
-  let msg = wrapper.querySelector('.error-message')
+  let msg = wrapper.querySelector('.input-group__message')
   msg.classList.remove('show-message')
   if (msg) {
     msg.innerHTML = ''
@@ -273,7 +273,7 @@ function hideErrorMessage (form, name) {
 
 function showErrorMessage (form, name, message) {
   let wrapper = form.querySelector(`[name="${name}"]`).parentElement
-  let msg = wrapper.querySelector('.error-message')
+  let msg = wrapper.querySelector('.input-group__message')
   msg.innerHTML = message
   msg.classList.add('show-message')
   wrapper.querySelector('.formElementData').classList.add('error')

@@ -1,0 +1,16 @@
+.tooltip {
+  &.show {
+    opacity: 1;
+  }
+
+  .arrow {
+    &::before {
+      border-top-color: #9b9c9e;
+    }
+  }
+
+  .tooltip-inner {
+    background-color: #9b9c9e;
+    font-size: 12px;
+  }
+}

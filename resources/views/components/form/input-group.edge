@@ -1,0 +1,17 @@
+<div class="input-group col-xs-12 {{ short ? 'col-sm-6 input-group--half' : '' }}">
+  <label class="input-group__label" for="{{ id }}">{{ label }}</label>
+
+  @if(type === 'select')
+    <select name="{{ name }}" class="formElementData input-group__select {{ className }}" id="{{ id }}">
+      @each((option, index) in options)
+        <option value="{{ index }}" selected>{{ option }}</option>
+      @end
+    </select>
+  @else
+    <input type="{{ type }}" name="{{ name }}" class="formElementData input-group__input" id="{{ id }}" placeholder="{{ placeholder }}" maxlength={{ maxlength ? maxlength : "" }}>
+  @endif
+  <span class="input-group__message input-group__message--error"></span>
+  @if(icon)
+    {{{ await $slots.icon() }}}
+  @endif
+</div>

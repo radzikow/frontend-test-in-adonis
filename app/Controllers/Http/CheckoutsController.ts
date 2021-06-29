@@ -22,7 +22,7 @@ export default class CheckoutsController {
         },
       },
     }
-    return view.render('checkout', state)
+    return view.render('pages/checkout', state)
   }
 
   public async order ({ request, response }: HttpContextContract) {

@@ -1,0 +1,123 @@
+<section class="form-section">
+    {{--  Personal information form group  --}}
+    <div class="form__group">
+      @!component('components/form/title', {
+        step: '1',
+        title: 'Personal information'
+      })
+      <div class="row">
+        @!component('components/form/input-group', {
+          short: true,
+          label: 'First name',
+          type: 'text',
+          name: 'first_name',
+          id: 'firstNameInput',
+          placeholder: 'Elon'
+        })
+        @!component('components/form/input-group', {
+          short: true,
+          type: 'text',
+          label: 'Last name',
+          name: 'last_name',
+          id: 'lastNameInput',
+          placeholder: 'Musk'
+        })
+      </div>
+      <div class="row">
+        @!component('components/form/input-group', {
+          label: 'Email',
+          type: 'email',
+          name: 'email',
+          id: 'emailInput',
+          placeholder: 'elon@spacex.com'
+        })
+      </div>
+      <div class="row">
+        @!component('components/form/input-group', {
+          short: true,
+          label: 'Country',
+          type: 'select',
+          name: 'country',
+          id: 'countryInput',
+          options: [
+            'United States'
+          ]
+        })
+        @!component('components/form/input-group', {
+          short: true,
+          type: 'text',
+          label: 'Postal Code',
+          name: 'postal_code',
+          id: 'postalCodeInput',
+          placeholder: '10001',
+          maxlength: 5
+        })
+      </div>
+      <div class="row">
+        @!component('components/form/input-group', {
+          label: 'Phone Number',
+          type: 'tel',
+          name: 'phone',
+          id: 'phoneInput',
+          placeholder: '(212) 692-93-92'
+        })
+      </div>
+    </div>
+    {{--  Payments details form group  --}}
+    <div class="form__group">
+      @component('components/form/title', {
+        step: '2',
+        title: 'Payments details',
+        icon: true
+      })
+        @!component('components/icons/lock-closed', {
+          height: '15px',
+          width: 'auto',
+          color: 'black'
+        })
+      @end
+      <div class="row">
+        @component('components/form/input-group', {
+          label: 'Credit Card Number',
+          type: 'text',
+          name: 'credit_card',
+          id: 'creditCardInput',
+          placeholder: '0000 - 0000 - 0000 - 0000',
+          maxlength: 25,
+          icon: true
+        })
+          @slot('icon')
+            <span class="visa-logo">
+              <img src="./images/visa.png" alt="Visa logo">
+            </span>
+          @end
+        @end
+      </div>
+      <div class="row">
+        @component('components/form/input-group', {
+          short: true,
+          label: 'Security code',
+          type: 'password',
+          name: 'security_code',
+          id: 'securityCodeInput',
+          placeholder: '***',
+          maxlength: 3
+        })
+          @slot('icon')
+            <span class="question-mark">
+              <i id="questionMarkIcon" class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="SECURITY CODE: It's the last three digits in the signature area on the back of your card."></i>
+            </span>
+          @end
+        @end
+        @!component('components/form/input-group', {
+          short: true,
+          type: 'text',
+          label: 'Expiration date',
+          name: 'expiration_date',
+          id: 'expirationDateInput',
+          placeholder: 'MM / YY',
+          maxlength: 7
+        })
+      </div>
+    </div>
+</section>

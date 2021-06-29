@@ -1,0 +1,31 @@
+@layout('layouts/main')
+@set('title', 'Checkout page')
+
+@section('body')
+<main class="container checkout-page">
+  <div class="message"></div>
+  <div class="row">
+    {{--  Form section  --}}
+    <form class="col-xs-12 col-md-8 form" action="{{ route('order') }}" method="POST" id="completePurchaseForm">
+      {{ csrfField() }}
+      @include('partials/form-section')
+    </form>
+
+    {{--  Summary section  --}}
+    @include('partials/summary-section')
+
+    {{--  Submit button  --}}
+    <div class="row">
+      <div class="col-xs-12 col-md-8 button-wrapper">
+        <button type="submit" id="completePurchaseButton">
+          @!component('components/icons/shopping-cart', {
+            height: '19px',
+            width: 'auto',
+            color: 'white'
+          })
+          Complete purchase</button>
+      </div>
+    </div>
+  </div>
+</main>
+@end

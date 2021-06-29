@@ -1,6 +1,4 @@
-import '../css/app.scss'
-import '../css/bacon.scss'
-import '../css/checkout.scss'
+import '../scss/app.scss'
 
 import './bacon'
 import './checkout'

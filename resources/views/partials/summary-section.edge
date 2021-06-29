@@ -1,0 +1,31 @@
+<section class="col-xs-12 col-md-4 summary-section">
+  <div class="summary-wrapper">
+    <div class="summary">
+      <h3 class="summary__title">Your order</h3>
+      <div class="summary__products">
+        @each(item in cart.items)
+          <div class="summary__product">
+            <p>{{ item.name }}</p>
+            <span>$ {{ item.price }}</span>
+          </div>
+        @end
+      </div>
+      <hr>
+      <div class="summary__purchases">
+        <div class="summary__purchase">
+          <p>Total purchases</p>
+          <span>$ {{ (cart.totals.subTotal).toFixed(2) }}</span>
+        </div>
+        <div class="summary__purchase">
+          <p>Estimated tax</p>
+          <span>$ {{ cart.totals.tax }}</span>
+        </div>
+      </div>
+      <hr>
+      <div class="summary__total">
+          <p>Total</p>
+          <span>$ {{ cart.totals.grandTotal }}</span>
+      </div>
+    </div>
+  </div>
+</section>
