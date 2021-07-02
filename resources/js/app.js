@@ -1,4 +1,7 @@
 import '../scss/app.scss'
 
 import './bacon'
-import './checkout'
+
+import './form/FormValidator'
+import './checkout/form'
+import './checkout/utilities'

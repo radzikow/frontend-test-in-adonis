@@ -67,11 +67,6 @@ function handleSecurityCodeInputBackspace (ev) {
   }
 }
 
-// Question mark tooltip (bootstrap) setup
-// $('#questionMarkIcon').tooltip({
-//   container: '#questionMarkIconContainer',
-// })
-
 // Handle complete purchase form submit
 const completePurchaseButton = document.getElementById('completePurchaseButton')
 const completePurchaseForm = document.getElementById('completePurchaseForm')
