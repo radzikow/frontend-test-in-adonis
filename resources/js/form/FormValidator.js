@@ -1,6 +1,7 @@
 import { getMessage } from './messages'
 import { required, string, email, number, phone, date, card } from './validators'
 import FormState from './FormState'
+import { submit } from './ajax_handler'
 
 export default class FormValidator {
   constructor (form, fields, messages) {
@@ -18,10 +19,13 @@ export default class FormValidator {
   validateOnSubmit () {
     this.form.addEventListener('submit', e => {
       e.preventDefault()
+
       this.fields.forEach(field => {
         const input = this.form.querySelector(`#${field.name}`)
         this.validateField(field, input)
       })
+
+      submit(this.form, this.state._state)
     })
   }
 
@@ -54,14 +58,15 @@ export default class FormValidator {
         }
       })
 
-      // Set status in the state of the form validation
       if (!passed) {
         let message = getMessage(field.name, currentRule, this.messages)
         this.setStatus(field.name, 'error', message)
+        this.insertMessage(field.name, message)
       }
 
       if (passed) {
         this.setStatus(field.name, 'success')
+        this.insertMessage(field.name, '')
       }
     }
   }
@@ -79,7 +84,22 @@ export default class FormValidator {
     if (status === 'success') {
       this.state.deleteField(name)
     }
+  }
 
-    console.log(this.state._state) // test
+  insertMessage (name, message) {
+    let field = this.form.querySelector(`#${name}`)
+    let msgBox = field.parentElement.querySelector('.input-group__message')
+
+    if (message !== '') {
+      msgBox.innerHTML = message
+      msgBox.classList.add('is-visible')
+      field.classList.add('error')
+    }
+
+    if (message === '') {
+      msgBox.innerHTML = message
+      msgBox.classList.remove('is-visible')
+      field.classList.remove('error')
+    }
   }
 }

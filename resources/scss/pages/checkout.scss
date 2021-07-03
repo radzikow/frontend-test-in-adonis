@@ -129,7 +129,7 @@
             border-bottom: 2px solid #a9acaf5e;
 
             &.error {
-              border-bottom: 2px solid $color-error-dark;
+              border-bottom: 2px solid $color-error-dark !important;
             }
 
             &::placeholder {
@@ -138,6 +138,7 @@
 
             &:focus-visible {
               outline: none;
+              border-bottom: 2px solid $color-error-dark;
             }
 
             &:focus {
@@ -168,7 +169,7 @@
             appearance: none;
 
             &.error {
-              border-bottom: 2px solid $color-error-dark;
+              border-bottom: 2px solid $color-error-dark !important;
             }
 
             &::placeholder {
@@ -177,6 +178,7 @@
 
             &:focus-visible {
               outline: none;
+              border-bottom: 2px solid $color-error-dark;
             }
 
             &:focus {
@@ -239,7 +241,7 @@
             opacity: 0;
             transition: all .2s;
 
-            &.show-message {
+            &.is-visible {
               opacity: 1;
             }
 

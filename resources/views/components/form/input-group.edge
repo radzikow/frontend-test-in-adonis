@@ -10,7 +10,7 @@
   @else
     <input type="{{ type }}" name="{{ name }}" class="formElementData input-group__input" id="{{ name }}" placeholder="{{ placeholder }}" maxlength={{ maxlength ? maxlength : "" }}>
   @endif
-  <span class="input-group__message input-group__message--error"></span>
+  <span class="input-group__message input-group__message--error">test</span>
   @if(icon)
     {{{ await $slots.icon() }}}
   @endif

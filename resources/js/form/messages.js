@@ -10,7 +10,7 @@ const defaultMessages = {
 }
 
 export const getMessage = (name, rule, messages) => {
-  let nName = name.charAt(0).toUpperCase() + name.slice(1)
+  let nName = name[0].toUpperCase() + name.slice(1)
   nName = nName.split('_').length > 1 ? nName.split('_').join(' ') : nName
 
   let finalMessage = defaultMessages[rule].replaceAll(':name', nName)
