@@ -2,7 +2,8 @@ import FormValidator from '../form/FormValidator'
 
 const form = document.querySelector('#completePurchaseForm')
 
-// Form fields that will be validated. All available rules are in the validators.js.
+// Form fields that will be validated (mind the order for validation messages priority).
+// All available rules are in the validators.js file.
 const fields = [
   {
     name: 'first_name',
@@ -42,7 +43,7 @@ const fields = [
   },
 ]
 
-// Custom fields' validation messages (overwrite default messages from the messages.js).
+// Custom fields' validation messages (overwrite default messages from the messages.js file).
 const messages = [
   // {
   //   name: 'first_name.required',

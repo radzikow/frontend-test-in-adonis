@@ -37,53 +37,30 @@ export default class FormValidator {
   }
 
   validateField (field, input) {
+    let validationFunctions = [required, string, email, number, phone, date, card]
+
     if (field.name === input.name) {
-      let isValid = true
-      let rule = 'required'
+      let passed = true
+      let currentRule = ''
 
-      // Mind the order for validation messages priority
-      if (isValid && field.rules.includes('required')) {
-        rule = 'required'
-        isValid = required(input.value)
-      }
-
-      if (isValid && field.rules.includes('string')) {
-        rule = 'string'
-        isValid = string(input.value)
-      }
-
-      if (isValid && field.rules.includes('email')) {
-        rule = 'email'
-        isValid = email(input.value)
-      }
-
-      if (isValid && field.rules.includes('number')) {
-        rule = 'number'
-        isValid = number(input.value)
-      }
-
-      if (isValid && field.rules.includes('phone')) {
-        rule = 'phone'
-        isValid = phone(input.value)
-      }
-
-      if (isValid && field.rules.includes('date')) {
-        rule = 'date'
-        isValid = date(input.value)
-      }
-
-      if (isValid && field.rules.includes('card')) {
-        rule = 'card'
-        isValid = card(input.value)
-      }
+      field.rules.forEach(rule => {
+        if (passed && field.rules.includes(rule)) {
+          currentRule = rule
+          validationFunctions.forEach(f => {
+            if (f.name === rule) {
+              passed = f(input.value)
+            }
+          })
+        }
+      })
 
       // Set status in the state of the form validation
-      if (!isValid) {
-        let message = getMessage(field.name, rule, this.messages)
+      if (!passed) {
+        let message = getMessage(field.name, currentRule, this.messages)
         this.setStatus(field.name, 'error', message)
       }
 
-      if (isValid) {
+      if (passed) {
         this.setStatus(field.name, 'success')
       }
     }
