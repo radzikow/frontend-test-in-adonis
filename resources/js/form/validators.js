@@ -10,7 +10,7 @@ const regex = {
 
 const useRegex = (val, rule) => regex[rule].test(val.trim()) ? true : false
 
-const required = (val) => val.trim() !== '' ? true : false
+const required = val => val.trim() !== '' ? true : false
 
 const email = val => useRegex(val, 'email')
 
@@ -24,6 +24,10 @@ const date = val => useRegex(val, 'date')
 
 const card = val => useRegex(val.replace(/[\s-]/g, ''), 'card')
 
+const min = (val, number) => val.length >= number ? true : false
+
+const max = (val, number) => val.length <= number ? true : false
+
 export {
   required,
   email,
@@ -32,4 +36,6 @@ export {
   phone,
   date,
   card,
+  min,
+  max,
 }

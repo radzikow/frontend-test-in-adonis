@@ -1,5 +1,5 @@
 import { getMessage } from './messages'
-import { required, string, email, number, phone, date, card } from './validators'
+import { required, string, email, number, phone, date, card, min, max } from './validators'
 import FormState from './FormState'
 import { submit } from './ajax_handler'
 
@@ -41,7 +41,7 @@ export default class FormValidator {
   }
 
   validateField (field, input) {
-    let validationFunctions = [required, string, email, number, phone, date, card]
+    let validationFunctions = [required, string, email, number, phone, date, card, min, max]
 
     if (field.name === input.name) {
       let passed = true
@@ -49,10 +49,20 @@ export default class FormValidator {
 
       field.rules.forEach(rule => {
         if (passed && field.rules.includes(rule)) {
-          currentRule = rule
           validationFunctions.forEach(f => {
-            if (f.name === rule) {
-              passed = f(input.value)
+            // handle rules with parameter, like: min, max
+            if (rule.includes('min') || rule.includes('max')) {
+              let ruleSet = rule.split(':')
+
+              if (f.name === ruleSet[0]) {
+                currentRule = rule
+                passed = f(input.value, ruleSet[1])
+              }
+            } else { // handle other rules
+              if (f.name === rule) {
+                currentRule = rule
+                passed = f(input.value)
+              }
             }
           })
         }

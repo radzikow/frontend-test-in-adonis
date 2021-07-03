@@ -7,11 +7,11 @@ const form = document.querySelector('#completePurchaseForm')
 const fields = [
   {
     name: 'first_name',
-    rules: ['required', 'string'],
+    rules: ['required', 'string', 'min:2', 'max:50'],
   },
   {
     name: 'last_name',
-    rules: ['required', 'string'],
+    rules: ['required', 'string', 'min:2', 'max:50'],
   },
   {
     name: 'email',
@@ -23,7 +23,7 @@ const fields = [
   },
   {
     name: 'postal_code',
-    rules: ['required', 'number'],
+    rules: ['required', 'number', 'min:5', 'max:5'],
   },
   {
     name: 'phone',
@@ -35,7 +35,7 @@ const fields = [
   },
   {
     name: 'security_code',
-    rules: ['required', 'number'],
+    rules: ['required', 'number', 'min:3', 'max:3'],
   },
   {
     name: 'expiration_date',
