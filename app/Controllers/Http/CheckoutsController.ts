@@ -49,10 +49,12 @@ export default class CheckoutsController {
     try {
       await request.validate({ schema: orderSchema })
       response.send({
-        message: 'Order successfully placed. Redirecting to the welcome page..',
+        message: 'Order successfully placed.',
       })
     } catch (error) {
-      response.badRequest(error.messages)
+      response.badRequest({
+        message: 'Error occurred while placing the order.',
+      })
     }
   }
 }

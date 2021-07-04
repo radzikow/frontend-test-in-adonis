@@ -5,8 +5,8 @@ export default class FormState {
     return this._state
   }
 
-  getField (id) {
-    return this._state[id]
+  getField (field) {
+    return this._state[field]
   }
 
   setField (field) {
@@ -15,9 +15,9 @@ export default class FormState {
     }
   }
 
-  updateField (id, props) {
-    this._state[id][props.key] = props.value
-    this.validateField(id, this._state[id])
+  updateField (field, props) {
+    this._state[field][props.key] = props.value
+    this.validateField(field, this._state[field])
   }
 
   deleteField (field) {

@@ -1,7 +1,7 @@
 import { getMessage } from './messages'
 import { required, string, email, number, phone, date, card, min, max } from './validators'
 import FormState from './FormState'
-import { submit } from './ajax_handler'
+import { submit } from './submit_handler'
 
 export default class FormValidator {
   constructor (form, fields, messages) {
