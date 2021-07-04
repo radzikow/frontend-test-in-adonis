@@ -103,13 +103,13 @@ export default class FormValidator {
     if (message !== '') {
       msgBox.innerHTML = message
       msgBox.classList.add('is-visible')
-      field.classList.add('error')
+      field.classList.add('input-group__input--error')
     }
 
     if (message === '') {
       msgBox.innerHTML = message
       msgBox.classList.remove('is-visible')
-      field.classList.remove('error')
+      field.classList.remove('input-group__input--error')
     }
   }
 }

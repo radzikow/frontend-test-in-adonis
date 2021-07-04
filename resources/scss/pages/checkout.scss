@@ -5,41 +5,42 @@
     margin: auto;
   }
 
-  .message {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 3px;
-    margin-bottom: 20px;
-    border: 2px solid #7b8187;
-    background-color: transparent;
-    color: #212834;
-    text-align: center;
-    transition: all .5s;
-    position: fixed;
-    z-index: 100;
-    padding: 50px 20px;
-    background-color: #f2f2f2;
-    font-size: 16px;
-    width: 40%;
-    left: 50%;
-    transform: translate(-50%, -100%);
-    display: none;
-
-    &.message--success {
-      display: block;
-      border: 2px solid $color-success-light;
-      color: $color-success-light;
-    }
-
-    &.message--error {
-      display: block;
-      border: 2px solid $color-error-light;
-      color: $color-error-light;
-    }
-  }
-
   .form {
+    .message {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 3px;
+      margin-bottom: 20px;
+      border: 2px solid #7b8187;
+      background-color: transparent;
+      color: #212834;
+      text-align: center;
+      transition: all .5s;
+      position: fixed;
+      z-index: 100;
+      padding: 50px 20px;
+      background-color: #f2f2f2;
+      font-size: 16px;
+      width: 40%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      display: none;
+
+      &.message--success {
+        display: block;
+        border: 2px solid $color-success-light;
+        color: $color-success-light;
+      }
+
+      &.message--error {
+        display: block;
+        border: 2px solid $color-error-light;
+        color: $color-error-light;
+      }
+    }
+
     .form-section {
       margin-right: 0;
 
@@ -132,7 +133,7 @@
             min-height: 53px;
             border-bottom: 2px solid #a9acaf5e;
 
-            &.error {
+            &.input-group__input--error {
               border-bottom: 2px solid $color-error-dark !important;
             }
 
@@ -172,7 +173,7 @@
             -webkit-appearance: none;
             appearance: none;
 
-            &.error {
+            &.input-group__input--error {
               border-bottom: 2px solid $color-error-dark !important;
             }
 
@@ -349,9 +350,13 @@
 
   .button-wrapper {
     width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
 
     @include respond-above('lg') {
-      padding-left: 35px;
+      padding-right: 0.5rem;
+      padding-left: 28px;
+      margin-bottom: 0;
     }
 
     button {

@@ -3,20 +3,16 @@
 
 @section('body')
 <main class="container checkout-page">
-  <div class="message"></div>
   <div class="row">
     {{--  Form section  --}}
     <form class="col-xs-12 col-md-8 form" action="{{ route('order') }}" method="POST" id="completePurchaseForm">
       {{ csrfField() }}
+      <div class="message"></div>
       @include('partials/form-section')
     </form>
 
     {{--  Summary section  --}}
     @include('partials/summary-section')
-
-    {{--  Submit button  --}}
-    {{--  <div class="row">
-    </div>  --}}
   </div>
 </main>
 @end
