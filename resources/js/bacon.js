@@ -7,7 +7,7 @@ if (cloneBaconBtn) {
 const baconImage = document.querySelector('img[src="/images/bacon.jpg"]')
 
 function cloneBaconImage () {
-  let clonedImage = baconImage.cloneNode(true)
+  const clonedImage = baconImage.cloneNode(true)
   baconImage.after(clonedImage)
   jumpToPageBottom()
 }

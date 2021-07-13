@@ -17,31 +17,35 @@ export default class FormValidator {
   }
 
   validateOnSubmit () {
-    this.form.addEventListener('submit', e => {
-      e.preventDefault()
+    if (this.form) {
+      this.form.addEventListener('submit', e => {
+        e.preventDefault()
 
-      this.fields.forEach(field => {
-        const input = this.form.querySelector(`#${field.name}`)
-        this.validateField(field, input)
+        this.fields.forEach(field => {
+          const input = this.form.querySelector(`#${field.name}`)
+          this.validateField(field, input)
+        })
+
+        submit(this.form, this.state._state)
       })
-
-      submit(this.form, this.state._state)
-    })
+    }
   }
 
   validateOnEntry () {
-    this.fields.forEach(field => {
-      if (field.rules && field.rules.length > 0) {
-        const input = document.querySelector(`#${field.name}`)
-        input.addEventListener('input', () => {
-          this.validateField(field, input)
-        })
-      }
-    })
+    if (this.form) {
+      this.fields.forEach(field => {
+        if (field.rules && field.rules.length > 0) {
+          const input = document.querySelector(`#${field.name}`)
+          input.addEventListener('input', () => {
+            this.validateField(field, input)
+          })
+        }
+      })
+    }
   }
 
   validateField (field, input) {
-    let validationFunctions = [required, string, email, number, phone, date, card, min, max]
+    const validationFunctions = [required, string, email, number, phone, date, card, min, max]
 
     if (field.name === input.name) {
       let passed = true
@@ -52,7 +56,7 @@ export default class FormValidator {
           validationFunctions.forEach(f => {
             // handle rules with parameter, like: min, max
             if (rule.includes('min') || rule.includes('max')) {
-              let ruleSet = rule.split(':')
+              const ruleSet = rule.split(':')
 
               if (f.name === ruleSet[0]) {
                 currentRule = rule
@@ -69,7 +73,7 @@ export default class FormValidator {
       })
 
       if (!passed) {
-        let message = getMessage(field.name, currentRule, this.messages)
+        const message = getMessage(field.name, currentRule, this.messages)
         this.setStatus(field.name, 'error', message)
         this.insertMessage(field.name, message)
       }
@@ -97,8 +101,8 @@ export default class FormValidator {
   }
 
   insertMessage (name, message) {
-    let field = this.form.querySelector(`#${name}`)
-    let msgBox = field.parentElement.querySelector('.input-group__message')
+    const field = this.form.querySelector(`#${name}`)
+    const msgBox = field.parentElement.querySelector('.input-group__message')
 
     if (message !== '') {
       msgBox.innerHTML = message

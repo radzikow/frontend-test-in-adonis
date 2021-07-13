@@ -7,9 +7,9 @@ if (creditCardInput) {
 }
 
 function handleCreditCardInputKeydown (ev) {
-  let rawNumbers = this.value.replace(/-/g, '')
-  let cardLength = rawNumbers.length
-  let charCode = ev.which ? ev.which : ev.keyCode
+  const rawNumbers = this.value.replace(/-/g, '')
+  const cardLength = rawNumbers.length
+  const charCode = ev.which ? ev.which : ev.keyCode
   if (charCode !== 8) {
     if (cardLength === 4 || cardLength === 10 || cardLength === 16) {
       this.value = this.value + ' - '
@@ -29,8 +29,8 @@ if (expirationDateInput) {
 }
 
 function handleExpirationDateInputKeyup (ev) {
-  let value = expirationDateInput.value
-  let charCode = ev.which ? ev.which : ev.keyCode
+  const value = expirationDateInput.value
+  const charCode = ev.which ? ev.which : ev.keyCode
   if (charCode !== 8) {
     if (value.length === 2) {
       expirationDateInput.value = value + ' / '
@@ -44,7 +44,7 @@ if (expirationDateInput) {
 }
 
 function handleExpirationDateInputBackspace (ev) {
-  let charCode = ev.which ? ev.which : ev.keyCode
+  const charCode = ev.which ? ev.which : ev.keyCode
   if (charCode === 8) {
     expirationDateInput.value = ''
   }
@@ -58,7 +58,7 @@ if (securityCodeInput) {
 }
 
 function handleSecurityCodeInputBackspace (ev) {
-  let charCode = ev.which ? ev.which : ev.keyCode
+  const charCode = ev.which ? ev.which : ev.keyCode
   if (charCode === 8) {
     securityCodeInput.value = ''
   }

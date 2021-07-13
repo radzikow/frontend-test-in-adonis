@@ -17,7 +17,7 @@ const validationPassed = state => {
 }
 
 const showFormMessage = (form, message, status) => {
-  let wrapper = form.querySelector('.message')
+  const wrapper = form.querySelector('.message')
   wrapper.innerHTML = message
 
   if (status === 'success') {
