@@ -22,7 +22,9 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', async ({ view }) => view.render('index'))
 
-Route.get('/bacon', 'BaconsController.index')
+Route.get('/bacon', ({ view }) => {
+  return view.render('pages/bacon')
+})
 
 Route.get('/checkout', 'CheckoutsController.index')
   .as('checkout')

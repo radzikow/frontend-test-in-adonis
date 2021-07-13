@@ -1,11 +1,14 @@
 import axios from 'axios'
+import regeneratorRuntime from 'regenerator-runtime'
 
-export const submit = (form, state) => {
+export const submit = async (form, state) => {
   if (validationPassed(state)) {
-    axios
-      .post('/order', getFormData(form))
-      .then(response => showFormMessage(form, response.data.message, 'success'))
-      .catch(error => showFormMessage(form, error.response.data.message, 'error'))
+    try {
+      const response = await axios.post('/order', getFormData(form))
+      showFormMessage(form, response.data.message, 'success')
+    } catch (error) {
+      showFormMessage(form, error.response.data.message, 'error')
+    }
   }
 }
 
@@ -28,51 +31,54 @@ const showFormMessage = (form, message, status) => {
   setTimeout(() => {
     clearForm(form)
     wrapper.classList.remove('message--success', 'message--error')
-  }, 5000)
+  }, 8000)
 }
 
 const getFormData = (form) => {
-  let elements = [...form.querySelectorAll('.formElementData')]
-  let data = {}
+  const formData = new FormData(form)
 
-  elements.map(element => {
-    let name = element.id
-    let value = element.value.trim()
+  if (formData.has('first_name')) {
+    const value = formData.get('first_name')
+    formData.set('firstName', value)
+    formData.delete('first_name')
+  }
 
-    if (name === 'phone') {
-      value = value.replace(/[\s()-]/g, '')
-    }
+  if (formData.has('last_name')) {
+    const value = formData.get('last_name')
+    formData.set('lastName', value)
+    formData.delete('last_name')
+  }
 
-    if (name === 'credit_card') {
-      name = 'creditCard'
-      value = value.replace(/[\s-]/g, '')
-    }
+  if (formData.has('security_code')) {
+    const value = formData.get('security_code')
+    formData.set('CVV', value)
+    formData.delete('security_code')
+  }
 
-    if (name === 'expiration_date') {
-      name = 'expDate'
-      value = value.replaceAll(' ', '')
-    }
+  if (formData.has('credit_card')) {
+    let value = formData.get('credit_card')
+    formData.set('creditCard', value.replace(/[\s-]/g, ''))
+    formData.delete('credit_card')
+  }
 
-    if (name === 'security_code') {
-      name = 'CVV'
-    }
+  if (formData.has('phone')) {
+    let value = formData.get('phone')
+    formData.set('phone', value.replace(/[\s()-]/g, ''))
+  }
 
-    if (name === 'first_name') {
-      name = 'firstName'
-    }
+  if (formData.has('expiration_date')) {
+    let value = formData.get('expiration_date')
+    formData.set('expDate', value.replaceAll(' ', ''))
+    formData.delete('expiration_date')
+  }
 
-    if (name === 'last_name') {
-      name = 'lastName'
-    }
+  if (formData.has('postal_code')) {
+    const value = formData.get('postal_code')
+    formData.set('postalCode', value)
+    formData.delete('postal_code')
+  }
 
-    if (name === 'postal_code') {
-      name = 'postalCode'
-    }
-
-    data = { ...data, [name]: value}
-  })
-
-  return data
+  return formData
 }
 
 const clearForm = (form) => {
