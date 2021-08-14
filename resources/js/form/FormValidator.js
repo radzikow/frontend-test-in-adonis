@@ -12,18 +12,18 @@ export default class FormValidator {
   }
 
   initialize () {
-    this.validateOnSubmit()
-    this.validateOnEntry()
+    this.validateFormFieldsOnSubmit()
+    this.validateFormFieldsOnEntry()
   }
 
-  validateOnSubmit () {
+  validateFormFieldsOnSubmit () {
     if (this.form) {
       this.form.addEventListener('submit', e => {
         e.preventDefault()
 
         this.fields.forEach(field => {
           const input = this.form.querySelector(`#${field.name}`)
-          this.validateField(field, input)
+          this.validateFormField(field, input)
         })
 
         submit(this.form, this.state._state)
@@ -31,20 +31,20 @@ export default class FormValidator {
     }
   }
 
-  validateOnEntry () {
+  validateFormFieldsOnEntry () {
     if (this.form) {
       this.fields.forEach(field => {
         if (field.rules && field.rules.length > 0) {
           const input = document.querySelector(`#${field.name}`)
           input.addEventListener('input', () => {
-            this.validateField(field, input)
+            this.validateFormField(field, input)
           })
         }
       })
     }
   }
 
-  validateField (field, input) {
+  validateFormField (field, input) {
     const validationFunctions = [required, string, email, number, phone, date, card, min, max]
 
     if (field.name === input.name) {
@@ -53,19 +53,19 @@ export default class FormValidator {
 
       field.rules.forEach(rule => {
         if (passed && field.rules.includes(rule)) {
-          validationFunctions.forEach(f => {
-            // handle rules with parameter, like: min, max
+          validationFunctions.forEach(validationFunction => {
+            // handle validation rules with parameter, like: min, max
             if (rule.includes('min') || rule.includes('max')) {
               const ruleSet = rule.split(':')
 
-              if (f.name === ruleSet[0]) {
+              if (validationFunction.name === ruleSet[0]) {
                 currentRule = rule
-                passed = f(input.value, ruleSet[1])
+                passed = validationFunction(input.value, ruleSet[1])
               }
             } else { // handle other rules
-              if (f.name === rule) {
+              if (validationFunction.name === rule) {
                 currentRule = rule
-                passed = f(input.value)
+                passed = validationFunction(input.value)
               }
             }
           })
@@ -74,18 +74,18 @@ export default class FormValidator {
 
       if (!passed) {
         const message = getMessage(field.name, currentRule, this.messages)
-        this.setStatus(field.name, 'error', message)
-        this.insertMessage(field.name, message)
+        this.setFieldStatus(field.name, 'error', message)
+        this.insertFieldMessage(field.name, message)
       }
 
       if (passed) {
-        this.setStatus(field.name, 'success')
-        this.insertMessage(field.name, '')
+        this.setFieldStatus(field.name, 'success')
+        this.insertFieldMessage(field.name, '')
       }
     }
   }
 
-  setStatus (name, status, message = '') {
+  setFieldStatus (name, status, message = '') {
     if (status === 'error') {
       this.state.setField({
         [name]: {
@@ -100,7 +100,7 @@ export default class FormValidator {
     }
   }
 
-  insertMessage (name, message) {
+  insertFieldMessage (name, message) {
     const field = this.form.querySelector(`#${name}`)
     const msgBox = field.parentElement.querySelector('.input-group__message')
 

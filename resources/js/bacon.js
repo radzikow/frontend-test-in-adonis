@@ -7,11 +7,11 @@ if (cloneBaconBtn) {
 const baconImage = document.querySelector('img[src="/images/bacon.jpg"]')
 
 function cloneBaconImage () {
-  const clonedImage = baconImage.cloneNode(true)
-  baconImage.after(clonedImage)
-  jumpToPageBottom()
+  const clonedBaconImage = baconImage.cloneNode(true)
+  baconImage.after(clonedBaconImage)
+  scrollPageToBottom()
 }
 
-function jumpToPageBottom () {
+function scrollPageToBottom () {
   window.scrollTo(0, document.body.scrollHeight)
 }

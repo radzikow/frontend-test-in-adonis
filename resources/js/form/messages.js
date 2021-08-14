@@ -1,36 +1,36 @@
-// Default field validation messages
-const defaultMessages = {
-  required: ':name is required',
-  string: ':name must be a string',
+// Default form validation messages
+const defaultFormValidationMessages = {
+  required: ':field is required',
+  string: ':field must be a string',
   email: 'E-mail address format is invalid',
   phone: 'Phone number format is invalid',
-  number: ':name must contain only numbers',
+  number: ':field must contain only numbers',
   date: 'Date format is invalid',
   card: 'Credit card format is invalid',
-  min: ':name must contain minimum :number characters',
-  max: ':name must contain maximum :number characters',
+  min: ':field must contain minimum :number characters',
+  max: ':field must contain maximum :number characters',
 }
 
-export const getMessage = (name, rule, messages) => {
-  let finalMessage
-  let nName = name[0].toUpperCase() + name.slice(1)
-  nName = nName.split('_').length > 1 ? nName.split('_').join(' ') : nName
+export const getMessage = (fieldName, rule, messages) => {
+  let finalValidationMessage
+  let newFieldName = fieldName[0].toUpperCase() + fieldName.slice(1)
+  newFieldName = newFieldName.split('_').length > 1 ? newFieldName.split('_').join(' ') : newFieldName
 
   if (rule.includes('min') || rule.includes('max')) {
     let ruleSet = rule.split(':')
-    finalMessage = defaultMessages[ruleSet[0]].replaceAll(':name', nName)
-    finalMessage = finalMessage.replaceAll(':number', ruleSet[1])
+    finalValidationMessage = defaultFormValidationMessages[ruleSet[0]].replaceAll(':field', newFieldName)
+    finalValidationMessage = finalValidationMessage.replaceAll(':number', ruleSet[1])
   } else {
-    finalMessage = defaultMessages[rule].replaceAll(':name', nName)
+    finalValidationMessage = defaultFormValidationMessages[rule].replaceAll(':field', newFieldName)
   }
 
   if (messages && messages.length > 0) {
     messages.forEach(message => {
-      if (message.name.includes(name) && message.name.includes(rule)) {
-        finalMessage = message.value
+      if (message.name.includes(fieldName) && message.name.includes(rule)) {
+        finalValidationMessage = message.value
       }
     })
   }
 
-  return finalMessage
+  return finalValidationMessage
 }

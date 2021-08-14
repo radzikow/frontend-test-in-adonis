@@ -1,10 +1,10 @@
 import FormValidator from '../form/FormValidator'
 
-const form = document.querySelector('#completePurchaseForm')
+const formElement = document.querySelector('#completePurchaseForm')
 
-// Form fields that will be validated (mind the order for validation messages priority).
-// All available rules are in the validators.js file.
-const fields = [
+// Form fields that will be validated (mind the order for the validation messages priority).
+// All available validation rules are in the validators.js file.
+const formFieldsNamesAndValidationRules = [
   {
     name: 'first_name',
     rules: ['required', 'string', 'min:2', 'max:50'],
@@ -43,8 +43,8 @@ const fields = [
   },
 ]
 
-// Custom fields' validation messages (overwrite default messages from the messages.js file).
-const messages = [
+// Custom validation fields' messages (overwrite default messages from the messages.js file).
+const customValidationMessages = [
   // {
   //   name: 'first_name.required',
   //   value: 'This is custom message for first name (required)',
@@ -52,6 +52,6 @@ const messages = [
 ]
 
 // Form initialization.
-const validator = new FormValidator(form, fields, messages)
+const formValidator = new FormValidator(formElement, formFieldsNamesAndValidationRules, customValidationMessages)
 
-validator.initialize()
+formValidator.initialize()
